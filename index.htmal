@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>초등저학년용 AI IQ 테스트</title>
+  <style>
+    body {
+      background: #121212;
+      color: #f0f0f0;
+      font-family: "Arial", sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 20px;
+    }
+    .question {
+      font-size: 1.4em;
+      margin: 20px 0;
+    }
+    .options button {
+      background: #f0c040;
+      border: none;
+      margin: 10px;
+      padding: 15px 25px;
+      font-size: 1.1em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 30px;
+    }
+    .certificate {
+      background: #1f1f1f;
+      border: 3px solid gold;
+      color: gold;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+    .certificate h1 {
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+    .certificate h2 {
+      font-size: 1.8em;
+      margin: 5px 0;
+    }
+    .certificate p {
+      font-size: 1.2em;
+      margin: 5px 0;
+    }
+    .signature {
+      font-family: "Cursive", sans-serif;
+      margin-top: 20px;
+      font-size: 1.1em;
+    }
+    input[type="text"], input[type="number"] {
+      padding: 10px;
+      font-size: 1em;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: none;
+      width: 200px;
+    }
+    button.start {
+      background: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 1.1em;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 초등저학년용 AI IQ 테스트</h1>
+    <div id="startScreen">
+      <p>아이 이름과 나이를 입력해 주세요</p>
+      <input type="text" id="childName" placeholder="아이 이름" /><br/>
+      <input type="number" id="childAge" placeholder="나이(세)" /><br/>
+      <button class="start" onclick="startTest()">테스트 시작</button>
+    </div>
+    <div id="quiz" style="display:none;">
+      <div id="question" class="question"></div>
+      <div id="options" class="options"></div>
+    </div>
+    <div id="result" class="result" style="display:none;">
+      <h2>🎉 테스트 완료!</h2>
+      <p id="koreanComment"></p>
+      <div id="certificate" class="certificate">
+        <h1>CERTIFICATE</h1>
+        <h2 id="certName"></h2>
+        <h2 id="certIQ"></h2>
+        <p id="certTest"></p>
+        <p id="certDesc"></p>
+        <div class="signature">
+          James Gordon<br/>
+          AI Director
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let current = 0;
+    let score = 0;
+    let childName = "";
+    let childAge = 0;
+
+    const questions = [
+      { q: "🔢 3 + 2 = ?", options: ["4", "5", "6"], answer: 1 },
+      { q: "🕰️ 시계가 3시를 가리키고 있어요. 1시간 뒤는?", options: ["4시", "5시", "2시"], answer: 0 },
+      { q: "🍎 사과 5개 중 2개를 먹었어요. 남은 건?", options: ["2개", "3개", "4개"], answer: 1 },
+      { q: "🐻 곰, 🐰 토끼, 🦊 여우. 가나다순으로 첫 번째 동물은?", options: ["토끼", "곰", "여우"], answer: 1 },
+      { q: "🔵🔴🔵🔴🔵❓ 다음에 올 색깔은?", options: ["🔵", "🔴"], answer: 1 },
+      { q: "📏 10cm보다 긴 것은?", options: ["연필", "버스", "지우개"], answer: 1 },
+      { q: "🎈 풍선이 공기보다 가벼운 이유는?", options: ["헬륨", "물", "돌"], answer: 0 },
+      { q: "🪜 계단을 한 칸씩 오르면 3번째는?", options: ["1", "2", "3"], answer: 2 },
+      { q: "🌧️☀️🌧️☀️🌧️❓ 다음은?", options: ["🌧️", "☀️"], answer: 1 },
+      { q: "📚 책상에 책 7권이 있어요. 3권은 바닥에 떨어졌어요. 남은 건?", options: ["4권", "5권", "3권"], answer: 0 }
+    ];
+
+    const ageExpectations = {8: 7, 9: 8, 10: 9};
+
+    function startTest() {
+      childName = document.getElementById("childName").value || "Your Child";
+      childAge = parseInt(document.getElementById("childAge").value) || 0;
+      document.getElementById("startScreen").style.display = "none";
+      document.getElementById("quiz").style.display = "block";
+      showQuestion();
+    }
+
+    function showQuestion() {
+      document.getElementById("question").innerHTML = questions[current].q;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      questions[current].options.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(i);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected) {
+      if (selected === questions[current].answer) score++;
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById("quiz").style.display = "none";
+      document.getElementById("result").style.display = "block";
+
+      let expected = ageExpectations[childAge] || 8;
+      let iqScore = 100 + (score - expected) * 10;
+      if (iqScore > 150) iqScore = 150;
+      if (iqScore < 70) iqScore = 70;
+      let iqLevel = iqScore >= 130 ? "(TOP 2%)" : iqScore >= 115 ? "(TOP 10%)" : "";
+
+      let koreanComment = "";
+      if (score > expected) koreanComment = "🌟 두드러진 관찰력과 집중력!";
+      else if (score === expected) koreanComment = "👍 평균 수준입니다";
+      else koreanComment = "🌱 조금 더 연습하면 좋아요";
+
+      document.getElementById("koreanComment").innerText = koreanComment;
+
+      document.getElementById("certName").innerText = childName;
+      document.getElementById("certIQ").innerText = `IQ: ${iqScore} ${iqLevel}`;
+      document.getElementById("certTest").innerText = "TEST: AI KIDS PUZZLE – COMPLETED";
+      document.getElementById("certDesc").innerText = "Certified as having a strong cognitive ability at their age group.";
+    }
+  </script>
+</body>
+</html>
