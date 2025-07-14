@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>중고등/성인용 AI IQ 테스트</title>
+  <title>성인용 AI IQ 테스트</title>
   <style>
     body {
       background: #121212;
@@ -80,7 +80,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>🧠 중고등/성인용 AI IQ 테스트</h1>
+    <h1>🧠 성인용 AI IQ 테스트</h1>
     <div id="startScreen">
       <p>이름과 나이를 입력해 주세요</p>
       <input type="text" id="userName" placeholder="이름" /><br/>
@@ -115,20 +115,22 @@
     let userAge = 0;
 
     const questions = [
-      { q: "🔢 15 x 4 = ?", options: ["60", "50", "70"], answer: 0 },
-      { q: "📅 2025년의 윤년 여부는?", options: ["윤년", "평년", "모름"], answer: 1 },
-      { q: "⏰ 2시간 45분은 몇 분?", options: ["165분", "155분", "175분"], answer: 0 },
-      { q: "📐 직각삼각형의 빗변은?", options: ["가장 긴 변", "가장 짧은 변", "같은 길이"], answer: 0 },
-      { q: "🌏 지구 자전은 몇 시간?", options: ["24시간", "12시간", "48시간"], answer: 0 },
-      { q: "🧮 100 ÷ 5 = ?", options: ["15", "20", "25"], answer: 1 },
-      { q: "📏 1km는 몇 m?", options: ["1000m", "100m", "10000m"], answer: 0 },
-      { q: "💡 에디슨이 발명한 것은?", options: ["전구", "전화기", "라디오"], answer: 0 },
-      { q: "📝 영어로 '사과'는?", options: ["Apple", "Banana", "Grape"], answer: 0 },
-      { q: "🎯 2, 4, 8, 16, ? 다음은?", options: ["24", "32", "64"], answer: 1 }
+      { q: "🔢 256 ÷ 8 = ?", options: ["30", "32", "34"], answer: 1 },
+      { q: "📅 2040년은 윤년인가?", options: ["예", "아니오", "모름"], answer: 0 },
+      { q: "⏰ 3시간 45분은 몇 분?", options: ["215분", "225분", "235분"], answer: 1 },
+      { q: "📐 원의 둘레 공식은?", options: ["2πr", "πr²", "r²"], answer: 0 },
+      { q: "🌏 태양계에서 가장 큰 행성은?", options: ["지구", "목성", "토성"], answer: 1 },
+      { q: "🧮 144의 제곱근은?", options: ["11", "12", "13"], answer: 1 },
+      { q: "📏 1마일은 약 몇 km?", options: ["1.6km", "2.2km", "0.8km"], answer: 0 },
+      { q: "💡 상대성 이론을 발표한 과학자는?", options: ["뉴턴", "아인슈타인", "갈릴레이"], answer: 1 },
+      { q: "📝 영어로 '책상'은?", options: ["Desk", "Table", "Chair"], answer: 0 },
+      { q: "🎯 1, 1, 2, 3, 5, 8, ? 다음은?", options: ["11", "13", "12"], answer: 1 }
     ];
 
     function expectedScore(age) {
-      return (age >= 14 ? 9 : 9); // 중고등·성인 동일 기대점수
+      if (age >= 61) return 7;
+      else if (age >= 51) return 8;
+      else return 9;
     }
 
     function startTest() {
