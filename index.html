@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>성인용 AI IQ 테스트</title>
+  <title>중고등·성인용 AI IQ 테스트</title>
   <style>
     body {
       background: #121212;
@@ -80,7 +80,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>🧠 성인용 AI IQ 테스트</h1>
+    <h1>🧠 중고등·성인용 AI IQ 테스트</h1>
     <div id="startScreen">
       <p>이름과 나이를 입력해 주세요</p>
       <input type="text" id="userName" placeholder="이름" /><br/>
@@ -115,16 +115,16 @@
     let userAge = 0;
 
     const questions = [
-      { q: "🔢 256 ÷ 8 = ?", options: ["30", "32", "34"], answer: 1 },
-      { q: "📅 2040년은 윤년인가?", options: ["예", "아니오", "모름"], answer: 0 },
-      { q: "⏰ 3시간 45분은 몇 분?", options: ["215분", "225분", "235분"], answer: 1 },
-      { q: "📐 원의 둘레 공식은?", options: ["2πr", "πr²", "r²"], answer: 0 },
-      { q: "🌏 태양계에서 가장 큰 행성은?", options: ["지구", "목성", "토성"], answer: 1 },
-      { q: "🧮 144의 제곱근은?", options: ["11", "12", "13"], answer: 1 },
-      { q: "📏 1마일은 약 몇 km?", options: ["1.6km", "2.2km", "0.8km"], answer: 0 },
-      { q: "💡 상대성 이론을 발표한 과학자는?", options: ["뉴턴", "아인슈타인", "갈릴레이"], answer: 1 },
-      { q: "📝 영어로 '책상'은?", options: ["Desk", "Table", "Chair"], answer: 0 },
-      { q: "🎯 1, 1, 2, 3, 5, 8, ? 다음은?", options: ["11", "13", "12"], answer: 1 }
+      { q: "🔢 128 ÷ 4 = ?", options: ["30", "32", "34"], answer: 1 },
+      { q: "📅 2052년은 윤년인가?", options: ["예", "아니오", "모름"], answer: 0 },
+      { q: "⏰ 4시간 15분은 몇 분?", options: ["245분", "255분", "265분"], answer: 1 },
+      { q: "📐 원의 넓이 공식은?", options: ["πr²", "2πr", "r²"], answer: 0 },
+      { q: "🌏 태양계에서 가장 작은 행성은?", options: ["수성", "화성", "지구"], answer: 0 },
+      { q: "🧮 196의 제곱근은?", options: ["14", "15", "16"], answer: 0 },
+      { q: "📏 1야드는 약 몇 m?", options: ["0.91m", "1.2m", "0.8m"], answer: 0 },
+      { q: "💡 만유인력의 법칙을 발표한 과학자는?", options: ["뉴턴", "아인슈타인", "갈릴레이"], answer: 0 },
+      { q: "📝 영어로 '사람'은?", options: ["People", "Person", "Human"], answer: 2 },
+      { q: "🎯 2, 3, 5, 7, 11, ? 다음은?", options: ["12", "13", "15"], answer: 1 }
     ];
 
     function expectedScore(age) {
