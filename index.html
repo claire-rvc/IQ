@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Preschool IQ Test</title>
+<title>미취학 아동 IQ 테스트</title>
 <style>
   body { background-color: #000; color: gold; font-family: 'Georgia', serif; text-align: center; padding: 20px; }
   #quiz, #certificate { max-width: 600px; margin: auto; border: 5px solid gold; padding: 20px; border-radius: 15px; }
@@ -13,16 +13,16 @@
 </style>
 </head>
 <body>
-  <h1>🧸 Preschool IQ Test</h1>
+  <h1>🧸 미취학 아동 IQ 테스트</h1>
   <div id="start">
-    <p>Please enter your name and age:</p>
-    <input type="text" id="name" placeholder="Name" required><br>
-    <input type="number" id="age" placeholder="Age" required><br>
-    <button onclick="startQuiz()">Start Test</button>
+    <p>이름과 나이를 입력하세요:</p>
+    <input type="text" id="name" placeholder="이름" required><br>
+    <input type="number" id="age" placeholder="나이" required><br>
+    <button onclick="startQuiz()">테스트 시작</button>
   </div>
 
   <div id="quiz" style="display:none;">
-    <h2 id="qTitle">Question 1</h2>
+    <h2 id="qTitle">문제 1</h2>
     <p id="qText"></p>
     <div id="answers"></div>
   </div>
@@ -42,24 +42,24 @@
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
     const questions = [
-      {q: "🐶 How many dogs? 🐶🐶🐶", a: ["2", "3", "4"], correct: "3", area: "Visual"},
-      {q: "🍎 2 apples + 🍌 1 banana = ?", a: ["2", "3", "4"], correct: "3", area: "Math"},
-      {q: "Which is bigger? 🐭 or 🐘", a: ["🐭", "🐘"], correct: "🐘", area: "Reasoning"},
-      {q: "Find the same: 🍓🍓🍇", a: ["🍓", "🍇"], correct: "🍓", area: "Visual"},
-      {q: "🦆🦆🦆 How many ducks?", a: ["2", "3", "4"], correct: "3", area: "Math"},
-      {q: "What comes next? 🔴🟠🟡 ?", a: ["🟢", "🔵", "🟣"], correct: "🟢", area: "Reasoning"},
-      {q: "Which is square? 🔵⬛🟢", a: ["🔵", "⬛", "🟢"], correct: "⬛", area: "Visual"},
-      {q: "Count the stars ⭐⭐⭐⭐", a: ["3", "4", "5"], correct: "4", area: "Math"},
-      {q: "Find the odd one out: 🐱🐱🐶", a: ["🐱", "🐶"], correct: "🐶", area: "Reasoning"},
-      {q: "What is red? 🍎🍌🍇", a: ["🍎", "🍌", "🍇"], correct: "🍎", area: "Visual"}
+      {q: "🐶 강아지가 몇 마리 있나요? 🐶🐶🐶", a: ["2", "3", "4"], correct: "3", area: "시각"},
+      {q: "🍎 사과 2개 + 🍌 바나나 1개는 총 몇 개?", a: ["2", "3", "4"], correct: "3", area: "수리"},
+      {q: "어느 쪽이 더 커요? 🐭 또는 🐘", a: ["🐭", "🐘"], correct: "🐘", area: "추론"},
+      {q: "같은 그림을 찾아보세요: 🍓🍓🍇", a: ["🍓", "🍇"], correct: "🍓", area: "시각"},
+      {q: "🦆🦆🦆 오리 몇 마리인가요?", a: ["2", "3", "4"], correct: "3", area: "수리"},
+      {q: "다음은 무엇일까요? 🔴🟠🟡 ?", a: ["🟢", "🔵", "🟣"], correct: "🟢", area: "추론"},
+      {q: "어느 것이 네모인가요? 🔵⬛🟢", a: ["🔵", "⬛", "🟢"], correct: "⬛", area: "시각"},
+      {q: "⭐⭐⭐⭐ 별 몇 개?", a: ["3", "4", "5"], correct: "4", area: "수리"},
+      {q: "다른 하나는 무엇인가요? 🐱🐱🐶", a: ["🐱", "🐶"], correct: "🐶", area: "추론"},
+      {q: "어떤 것이 빨간색인가요? 🍎🍌🍇", a: ["🍎", "🍌", "🍇"], correct: "🍎", area: "시각"}
     ];
 
-    let userName = "", userAge = 0, currentQ = 0, score = 0, areaScores = {Visual: 0, Math: 0, Reasoning: 0};
+    let userName = "", userAge = 0, currentQ = 0, score = 0, areaScores = {시각: 0, 수리: 0, 추론: 0};
 
     function startQuiz() {
       userName = document.getElementById('name').value;
       userAge = parseInt(document.getElementById('age').value);
-      if (!userName || !userAge) return alert("Please enter name and age.");
+      if (!userName || !userAge) return alert("이름과 나이를 입력해주세요.");
       document.getElementById('start').style.display = 'none';
       document.getElementById('quiz').style.display = 'block';
       showQuestion();
@@ -67,7 +67,7 @@
 
     function showQuestion() {
       if (currentQ >= questions.length) return finishQuiz();
-      document.getElementById('qTitle').innerText = `Question ${currentQ + 1}`;
+      document.getElementById('qTitle').innerText = `문제 ${currentQ + 1}`;
       document.getElementById('qText').innerText = questions[currentQ].q;
       const answersDiv = document.getElementById('answers');
       answersDiv.innerHTML = "";
@@ -100,9 +100,9 @@
       document.getElementById('certPercentile').innerText = percentile;
 
       document.getElementById('certDetails').innerHTML = `
-        Visual: ${areaScores.Visual}/4<br>
-        Math: ${areaScores.Math}/3<br>
-        Reasoning: ${areaScores.Reasoning}/3
+        Visual: ${areaScores.시각}/4<br>
+        Math: ${areaScores.수리}/3<br>
+        Reasoning: ${areaScores.추론}/3
       `;
 
       document.getElementById('certificate').style.display = 'block';
