@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>미취학 아동 IQ 테스트</title>
+<title>초등 저학년 IQ 테스트</title>
 <style>
   body { background-color: #000; color: gold; font-family: 'Georgia', serif; text-align: center; padding: 20px; }
-  #quiz, #certificate { max-width: 600px; margin: auto; border: 5px solid gold; padding: 20px; border-radius: 15px; }
+  #quiz, #certificate { max-width: 700px; margin: auto; border: 5px solid gold; padding: 20px; border-radius: 15px; }
   button { background: gold; color: black; border: none; padding: 10px 20px; font-size: 1.2em; margin: 10px; cursor: pointer; border-radius: 8px; }
   input { padding: 8px; font-size: 1.2em; margin-bottom: 15px; width: 80%; }
   .question { margin: 20px 0; }
 </style>
 </head>
 <body>
-  <h1>🧸 미취학 아동 IQ 테스트</h1>
+  <h1>📘 초등 저학년 IQ 테스트</h1>
   <div id="start">
     <p>이름과 나이를 입력하세요:</p>
     <input type="text" id="name" placeholder="이름" required><br>
@@ -31,7 +31,7 @@
     <h1>CERTIFICATE OF IQ ACHIEVEMENT</h1>
     <h2 id="certName"></h2>
     <p>has achieved an IQ of <span id="certIQ"></span></p>
-    <p>on the Preschool IQ Test</p>
+    <p>on the Elementary Lower Grade IQ Test</p>
     <hr>
     <p><b>📊 Score Analysis:</b></p>
     <p id="certDetails"></p>
@@ -42,16 +42,31 @@
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
     const questions = [
-      {q: "🐶 강아지가 몇 마리 있나요? 🐶🐶🐶", a: ["2", "3", "4"], correct: "3", area: "시각"},
-      {q: "🍎 사과 2개 + 🍌 바나나 1개는 모두 몇 개?", a: ["2", "3", "4"], correct: "3", area: "수리"},
-      {q: "어느 것이 더 큽니까? 🐭 또는 🐘", a: ["🐭", "🐘"], correct: "🐘", area: "추론"},
-      {q: "다른 그림을 찾으세요: 🍓🍓🍇", a: ["🍓", "🍇"], correct: "🍇", area: "시각"},
-      {q: "🦆🦆🦆 오리 몇 마리인가요?", a: ["2", "3", "4"], correct: "3", area: "수리"},
-      {q: "다음에 나올 것은 무엇일까요? 🔵🔴🔵🔴 ?", a: ["🔵", "🔴", "🟢"], correct: "🔵", area: "추론"},
-      {q: "네모를 찾으세요: 🔴⬛🔵", a: ["🔴", "⬛", "🔵"], correct: "⬛", area: "시각"},
-      {q: "⭐⭐⭐ 별 몇 개입니까?", a: ["2", "3", "4"], correct: "3", area: "수리"},
-      {q: "다른 동물은 무엇입니까? 🐱🐱🐶", a: ["🐱", "🐶"], correct: "🐶", area: "추론"},
-      {q: "빨간색은 무엇입니까? 🍎🍌🍇", a: ["🍎", "🍌", "🍇"], correct: "🍎", area: "시각"}
+      // 시각 영역 (5문제)
+      {q: "다른 그림을 찾으세요: 🍎🍎🍌", a: ["🍎", "🍌"], correct: "🍌", area: "시각"},
+      {q: "같은 도형은 무엇인가요? 🔺🔵🔺", a: ["🔺", "🔵"], correct: "🔺", area: "시각"},
+      {q: "빨간색을 찾으세요: 🍎🍌🍇", a: ["🍎", "🍌", "🍇"], correct: "🍎", area: "시각"},
+      {q: "다른 동물은 무엇인가요? 🐶🐶🐱", a: ["🐶", "🐱"], correct: "🐱", area: "시각"},
+      {q: "어떤 것이 네모입니까? 🔴⬛🔵", a: ["🔴", "⬛", "🔵"], correct: "⬛", area: "시각"},
+
+      // 수리 영역 (7문제)
+      {q: "5 + 3 = ?", a: ["7", "8", "9"], correct: "8", area: "수리"},
+      {q: "10 - 4 = ?", a: ["5", "6", "7"], correct: "6", area: "수리"},
+      {q: "2 x 3 = ?", a: ["5", "6", "7"], correct: "6", area: "수리"},
+      {q: "9 ÷ 3 = ?", a: ["2", "3", "4"], correct: "3", area: "수리"},
+      {q: "4, 8, 12, 다음은?", a: ["14", "16", "20"], correct: "16", area: "수리"},
+      {q: "7 + 2 = ?", a: ["8", "9", "10"], correct: "9", area: "수리"},
+      {q: "12 - 5 = ?", a: ["6", "7", "8"], correct: "7", area: "수리"},
+
+      // 추론 영역 (8문제)
+      {q: "다음에 올 것은? 🔵🔴🔵🔴 ?", a: ["🔵", "🔴", "🟢"], correct: "🔵", area: "추론"},
+      {q: "🐶➡🐾, 🐱➡?", a: ["🐟", "🐾", "🐹"], correct: "🐾", area: "추론"},
+      {q: "시간: 오후 3시. 시계는?", a: ["🕒", "🕓", "🕔"], correct: "🕒", area: "추론"},
+      {q: "날씨에 어울리는 옷은? ❄️", a: ["반팔", "코트", "모자"], correct: "코트", area: "추론"},
+      {q: "🍌, 🍇, 🍌, 다음은?", a: ["🍇", "🍌", "🍎"], correct: "🍇", area: "추론"},
+      {q: "어느 것이 빠릅니까? 🐢🐇", a: ["🐢", "🐇"], correct: "🐇", area: "추론"},
+      {q: "차례대로 배열하세요: 🥚🐥🐓", a: ["🥚🐥🐓", "🐓🐥🥚", "🐥🥚🐓"], correct: "🥚🐥🐓", area: "추론"},
+      {q: "다음 중 물건이 아닌 것은?", a: ["책", "의자", "기린"], correct: "기린", area: "추론"}
     ];
 
     let userName = "", userAge = 0, currentQ = 0, score = 0, areaScores = {시각: 0, 수리: 0, 추론: 0};
@@ -91,7 +106,7 @@
     function finishQuiz() {
       document.getElementById('quiz').style.display = 'none';
       const rawIQ = Math.round((score / questions.length) * 150);
-      const ageBonus = userAge <= 5 ? 15 : userAge == 6 ? 10 : 0;
+      const ageBonus = userAge <= 7 ? 15 : userAge == 8 ? 10 : userAge == 9 ? 5 : 0;
       const finalIQ = rawIQ + ageBonus;
       const percentile = finalIQ >= 140 ? 1 : finalIQ >= 120 ? 10 : finalIQ >= 100 ? 50 : 80;
 
@@ -100,9 +115,9 @@
       document.getElementById('certPercentile').innerText = percentile;
 
       document.getElementById('certDetails').innerHTML = `
-        Visual: ${areaScores.시각}/4<br>
-        Math: ${areaScores.수리}/3<br>
-        Reasoning: ${areaScores.추론}/3
+        Visual: ${areaScores.시각}/5<br>
+        Math: ${areaScores.수리}/7<br>
+        Reasoning: ${areaScores.추론}/8
       `;
 
       document.getElementById('certificate').style.display = 'block';
